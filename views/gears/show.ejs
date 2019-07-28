@@ -1,0 +1,94 @@
+<% include ../partials/header %>
+
+<div class="container mt-5">
+  <a href="/index">Go back to Gears</a>
+  <div class="row justify-content-center">
+    <div class="col col-10 ">
+      <div class="card" style="">
+        <div class="img-thumbnail d-flex flex-nowrap" style="height: 100%;">
+          <img class="card-img-top" src="<%= gear.img %>" alt="Card image cap">
+        </div>
+        <div class="card-body pb-0">
+          <p class="float-right"><em>From <%= gear.author.username %> with <i class="fas fa-heart text-danger"></i></em></p>
+          <form action="/index/<%= gear._id %>/like" method="POST">
+            <div class="btn-group">
+              <% if (currentUser && gear.likes.some(function (like) {
+                return like.equals(currentUser._id)
+            })) { %>
+              <button class="btn btn-sm btn-primary">
+                <i class="fas fa-thumbs-up"></i> Liked (<%= gear.likes.length %>)
+              </button>
+              <% } else { %>
+              <button class="btn btn-sm btn-secondary">
+                <i class="fas fa-thumbs-up"></i> Like (<%= gear.likes.length %>)
+              </button>
+              <% } %>
+            </div>
+          </form>
+        </div>
+        <div class="card-body pt-0">
+          <% if(currentUser && gear.author.id.equals(currentUser._id)) { %>
+          <form action="/index/<%= gear._id %>?_method=delete" method="post">
+            <button class="btn btn-small btn-danger float-right">Delete</button>
+          </form>
+          <a href="/index/<%= gear._id %>/edit" class="float-right btn btn-small btn-warning mr-1">Edit</a>
+          <% } %>
+        </div>
+        <div class="card-body mt-0">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="shipment-tab" data-toggle="tab" href="#shipment" role="tab" aria-controls="shipment" aria-selected="false">Shipment</a>
+            </li>
+          </ul>
+          <div class="tab-content mt-3 mb-3" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              <h4 class="card-text">Brand: <span class="h5"><%= gear.brand %></span></h4>
+              <h4 class="card-text">Gender: <span class="h5"><%= gear.gender %></span></h4>
+              <h4 class="card-text">Size: <span class="h5"><%= gear.size %></span></h4>
+              <h4 class="card-text">Condition: <span class="h5"><%= gear.condition %></span></h4>
+            </div>
+            <div class="tab-pane fade mt-3 mb-3" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+              <a class="float-right" href="/index/<%= gear.id %>/comments/new">Add comments</a>
+              <h4 class="card-text">Reviews:</h4>
+              <% gear.comments.forEach(function(comment){ %>
+              <div class="row">
+                <div class="col col-12">
+                  <p><strong><%= comment.author.username %></strong><span class="float-right"><%= moment(comment.createAt).fromNow() %></span></p>
+                  <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
+                  <form class="" action="/index/<%= gear._id %>/comments/<%= comment._id %>?_method=delete" method="post">
+                    <button class="btn btn-xs btn-danger float-right">Delete</button>
+                  </form>
+                  <a class="btn btn-xs btn-warning float-right mr-1" href="/index/<%= gear._id %>/comments/<%= comment._id %>/edit">Edit</a>
+                  <% } %>
+                  <p>- <%= comment.text %></p>
+                  <hr>
+                </div>
+              </div>
+              <% }) %>
+            </div>
+            <div class="tab-pane fade mt-3 mb-3" id="shipment" role="tabpanel" aria-labelledby="shipment-tab">
+              <h4>How can I get this gear?</h4>
+              <ul>
+                <% if(gear.shipVia.length === 0 && gear.location.length === 0) {%>
+                <p>Owner did not specify. Please contact <%= gear.author.username %></p>
+                <% } %>
+                <li>Ship via: <%= gear.shipVia %></li>
+                <li>Pickup at: <%= gear.location %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<% include ../partials/footer %>

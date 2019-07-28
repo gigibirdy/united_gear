@@ -1,0 +1,20 @@
+<% include ./partials/header %>
+
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col col-12 text-center">
+      <h2>Sign In</h2>
+    </div>
+    <div class="col col-8 mt-3 pr-0">
+<form class="" action="/login" method="post">
+  <input class="form-control" type="text" name="username" value="" placeholder="username">
+  <input class="form-control mt-2" type="password" id="typepass" name="password" value="" placeholder="password">
+  <button class="btn btn-large btn-primary form-control mt-2">Sign In</button>
+</form>
+</div>
+<div class="col col-2" style="font-size: 15px; margin-top: 70px;">
+    <p><input type="checkbox" onclick="Toggle()"> Show Password</p>
+</div>
+</div>
+</div>
+<% include ./partials/footer %>

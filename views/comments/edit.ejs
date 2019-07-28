@@ -1,0 +1,25 @@
+<% include ../partials/header %>
+
+
+<div class="container">
+  <div class="row d-flex justify-content-center mt-5">
+    <div class="col col-12 text-center">
+      <h2>Edit your comments</h2>
+    </div>
+    <div class="col col-8 mt-3">
+      <form action="/index/<%= gear._id %>/comments/<%= comment._id %>?_method=PUT" method="post">
+          <div class="form-group">
+            <label for="comment_text">Please enter your comments here.</label>
+          <input id="comment_text" class="form-control" name="comment[text]" value="<%= comment.text %>">
+          </div>
+        <button class="form-control btn btn-large btn-primary">Submit</button>
+      </form>
+      <div class="mt-3">
+        <a href="/index/<%= gear._id %>">Go back</a>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<% include ../partials/footer %>

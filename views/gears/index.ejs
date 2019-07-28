@@ -1,0 +1,39 @@
+<% include ../partials/header %>
+<div class="container">
+  <header class="jumbotron">
+    <div class="">
+      <h1>Gears</h1>
+      <p>Check out our tuned, waxed, ready to use gears. Want to rent out you gears for the entire season?</p>
+      <a href="/index/new" class="btn btn-large btn-primary">Click Me!</a>
+    </div>
+  </header>
+
+  <div class="row ">
+    <% gears.forEach(function(gear) { %>
+    <div class="col col-md-4 mt-3">
+      <div class="card" style="width: 20rem; height: 33rem;">
+        <div class="img-thumbnail d-flex flex-nowrap" style="width: 20rem; height: 20rem;">
+          <img class="card-img-top" src="<%= gear.img %>" alt="Card image cap">
+        </div>
+        <div class="mt-2 mr-2">
+          <span class="badge badge-primary ml-1 float-right"><%= gear.likes.length %></span>
+          <i class="fas fa-thumbs-up float-right text-primary"></i>
+
+        </div>
+        <div class="card-body text-truncate pt-0">
+          <h4 class="card-text">Brand: <span class="h5"><%= gear.brand %></span></h4>
+          <h4 class="card-text">Gender: <span class="h5"><%= gear.gender %></span></h4>
+          <h4 class="card-text">Size: <span class="h5"><%= gear.size %></span></h4>
+          <h4 class="card-text">Condition: <span class="h5"><%= gear.condition %></span></h4>
+        </div>
+        <a href="/index/<%= gear._id %>" class="btn btn-small btn-info">More info</a>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+</div>
+
+
+
+
+<% include ../partials/footer %>

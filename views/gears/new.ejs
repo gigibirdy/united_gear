@@ -1,0 +1,44 @@
+<% include ../partials/header %>
+
+
+<div class="container">
+  <div class="row d-flex justify-content-center mt-5">
+    <div class="col col-12 text-center">
+      <h2>Let us know your gears</h2>
+    </div>
+    <div class="col col-8 mt-3">
+      <form action="/index" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="gear-imgs">Upload images of your gear<sup>*</sup></label>
+          <input id="gear-imgs" class="form-control" type="file" name="img" value="" accept="image/*" required>
+        </div>
+        <div class="form-group">
+          <label for="gear-brand">Specify the brand of your gear<sup>*</sup></label>
+          <input id="gear-brand" class="form-control" type="text" name="brand" value="" required>
+        </div>
+        <div class="form-group">
+          <label for="gear-gender">Specify the gender of your gear for</label>
+          <input id="gear-gender" class="form-control" type="text" name="gender" value="">
+        </div>
+        <div class="form-group">
+          <label for="gear-size">Specify size of your gear<sup>*</sup></label>
+          <input id="gear-size" class="form-control" type="text" name="size" value="" required>
+        </div>
+        <div class="form-group">
+          <label for="gear-condition">Describe condition of your gear<sup>*</sup></label>
+          <input id="gear-condition" class="form-control" type="text" name="condition" value="" required>
+        </div>
+        <div class="form-group">
+          <label for="location">Specify city and state where this item is available for pickup if applicable</label>
+          <input class="form-control" type="text" name="location" id="location" placeholder="City, State">
+        </div>
+        <div class="form-group">
+          <label for="shipVia">Ship via</label>
+          <input id="shipVia" class="form-control" type="text" name="shipVia" placeholder="UPS, USPS, FEDEX...">
+        </div>
+        <button class="form-control btn btn-large btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+<% include ../partials/footer %>
